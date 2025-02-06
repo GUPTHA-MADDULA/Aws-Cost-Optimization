@@ -6,7 +6,7 @@ Amazon Elastic Block Store (EBS) snapshots are incremental backups of EBS volume
 
 Since snapshots are priced per GB-month, it's essential to periodically audit and delete those no longer needed to optimize costs.
 
-How to Identify Stale EBS Snapshots?
+#How to Identify Stale EBS Snapshots?
 A stale snapshot is a backup that is no longer linked to an active EC2 instance or volume. Typically, snapshots are created manually or through AWS Backup, but if an EC2 instance or EBS volume is deleted, its associated snapshots may remain indefinitely, incurring unnecessary costs.
 
 To identify stale snapshots, we follow these steps:
@@ -20,12 +20,12 @@ Automating Cleanup with AWS Lambda
 AWS Lambda, combined with AWS SDK (Boto3 for Python), allows us to automate this process efficiently. The Lambda function performs the following actions:
 
 Step 1: Fetch All EBS Snapshots
-Use the describe_snapshots API to get a list of all snapshots created by the account (OwnerIds=['self']).
+Use the 'describe_snapshots' API to get a list of all snapshots created by the account ('OwnerIds=['self']').
 Step 2: Fetch All Active EC2 Instances & Volumes
-Use describe_instances to get all EC2 instances that are either running or stopped.
-Extract volume IDs attached to these instances using describe_volumes.
+Use 'describe_instances' to get all EC2 instances that are either running or stopped.
+Extract volume IDs attached to these instances using 'describe_volumes'.
 Step 3: Identify Stale Snapshots
 For each snapshot, check if its source volume still exists.
 If the volume is missing from the active instance list, the snapshot is stale.
 Step 4: Delete Stale Snapshots
-Use delete_snapshot to remove snapshots that meet the stale criteria.
+Use 'delete_snapshot' to remove snapshots that meet the stale criteria.
