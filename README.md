@@ -20,13 +20,13 @@ A stale snapshot is a backup that is no longer linked to an active EC2 instance 
 <h2> Automating Cleanup with AWS Lambda </h2>
 AWS Lambda, combined with AWS SDK (Boto3 for Python), allows us to automate this process efficiently. The Lambda function performs the following actions:
 
-Step 1: Fetch All EBS Snapshots
-Use the 'describe_snapshots' API to get a list of all snapshots created by the account ('OwnerIds=['self']').
-Step 2: Fetch All Active EC2 Instances & Volumes
-Use 'describe_instances' to get all EC2 instances that are either running or stopped.
-Extract volume IDs attached to these instances using 'describe_volumes'.
-Step 3: Identify Stale Snapshots
-For each snapshot, check if its source volume still exists.
-If the volume is missing from the active instance list, the snapshot is stale.
-Step 4: Delete Stale Snapshots
-Use 'delete_snapshot' to remove snapshots that meet the stale criteria.
+<h3>Step 1: Fetch All EBS Snapshots</h3> 
+<li>Use the 'describe_snapshots' API to get a list of all snapshots created by the account ('OwnerIds=['self']').</li> 
+<h3> Step 2: Fetch All Active EC2 Instances & Volumes</h3>
+<li>Use 'describe_instances' to get all EC2 instances that are either running or stopped.</li>
+<li>Extract volume IDs attached to these instances using 'describe_volumes'.</li>
+<h3>Step 3: Identify Stale Snapshots</h3>
+<li>For each snapshot, check if its source volume still exists.</li>
+<li>If the volume is missing from the active instance list, the snapshot is stale.</li>
+<h3>Step 4: Delete Stale Snapshots</h3>
+<li>Use 'delete_snapshot' to remove snapshots that meet the stale criteria.</li>
