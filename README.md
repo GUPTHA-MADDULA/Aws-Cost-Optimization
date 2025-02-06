@@ -9,7 +9,7 @@ Since snapshots are priced per GB-month, it's essential to periodically audit an
 <h2> How to Identify Stale EBS Snapshots?</h2>
 A stale snapshot is a backup that is no longer linked to an active EC2 instance or volume. Typically, snapshots are created manually or through AWS Backup, but if an EC2 instance or EBS volume is deleted, its associated snapshots may remain indefinitely, incurring unnecessary costs.
 
-#To identify stale snapshots, we follow these steps:
+<h4>To identify stale snapshots, we follow these steps:</h4>
 1.Retrieve all EBS snapshots owned by the account.
 2.Fetch all active EC2 instances (both running and stopped) and extract the associated volumes.
 3Compare the snapshot’s source volume with active EC2 volumes:
