@@ -1,4 +1,4 @@
-# Aws-Cost-Optimization
+<h1>Aws-Cost-Optimization</h1>
 
 AWS Cloud Cost Optimization – Identifying Stale EBS Snapshots
 Why Identify Stale EBS Snapshots?
@@ -6,17 +6,18 @@ Amazon Elastic Block Store (EBS) snapshots are incremental backups of EBS volume
 
 Since snapshots are priced per GB-month, it's essential to periodically audit and delete those no longer needed to optimize costs.
 
-#How to Identify Stale EBS Snapshots?
+<h2> How to Identify Stale EBS Snapshots?</h2>
 A stale snapshot is a backup that is no longer linked to an active EC2 instance or volume. Typically, snapshots are created manually or through AWS Backup, but if an EC2 instance or EBS volume is deleted, its associated snapshots may remain indefinitely, incurring unnecessary costs.
 
-To identify stale snapshots, we follow these steps:
+#To identify stale snapshots, we follow these steps:
+1.Retrieve all EBS snapshots owned by the account.
+2.Fetch all active EC2 instances (both running and stopped) and extract the associated volumes.
+3Compare the snapshot’s source volume with active EC2 volumes:
+<li>If the snapshot references a volume that no longer exists or is not attached to an instance, it's considered stale.</li>
+<li>Delete the stale snapshots to free up storage.</li>
 
-Retrieve all EBS snapshots owned by the account.
-Fetch all active EC2 instances (both running and stopped) and extract the associated volumes.
-Compare the snapshot’s source volume with active EC2 volumes:
-If the snapshot references a volume that no longer exists or is not attached to an instance, it's considered stale.
-Delete the stale snapshots to free up storage.
-Automating Cleanup with AWS Lambda
+
+<h2> Automating Cleanup with AWS Lambda </h2>
 AWS Lambda, combined with AWS SDK (Boto3 for Python), allows us to automate this process efficiently. The Lambda function performs the following actions:
 
 Step 1: Fetch All EBS Snapshots
